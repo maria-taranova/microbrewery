@@ -1,0 +1,151 @@
+    <div class="container">
+        <div class="row form-group">
+            <div class="col-xs-12">
+                <ul class="nav nav-pills nav-justified thumbnail setup-panel">
+                    <li class="active" id="st-1">
+                        <a href="javascript:void(0)">
+                        <h4 class="list-group-item-heading">Step 1</h4>
+                        <p class="list-group-item-text">Shopping Cart</p></a>
+                    </li>
+                    <li class="disabled" id="st-2">
+                        <a href="javascript:void(0)">
+                        <h4 class="list-group-item-heading">Step 2</h4>
+                        <p class="list-group-item-text">Second step
+                        description</p></a>
+                    </li>
+                    <li class="disabled" id="st-3">
+                        <a href="javascript:void(0)">
+                        <h4 class="list-group-item-heading">Step 3</h4>
+                        <p class="list-group-item-text">Third step
+                        description</p></a>
+                    </li>
+                </ul>
+            </div>
+        </div><!--*Cart*-->
+        <div class="row setup-content step-active" id="step-1" ng-init="checkCart()">
+            <div class="col-xs-12">
+                <div class="col-md-12 well text-center">
+                    <h2>Shopping Cart</h2>
+                    <div>
+                        <table class="table">
+                            <tr>
+                                <th>Description</th>
+                                <th>Qty</th>
+                                <th>Cost</th>
+                                <th>Total</th>
+                                <th></th>
+                            </tr>
+                            <tr ng-model="items" ng-repeat="item in items">
+                                <td>{{item.title}}</td>
+                                <td><input class="input-mini" type=
+                                "number" min="1" id="qty" ng-model="item.qty" ng-change="changed()"></td>
+                                <td>{{item.cost|currency}}</td>
+                                <td>{{item.qty * item.cost | currency}}</td>
+                                <td>
+                                    [<a ng-click="removeItem($index)" href="">X</a>]
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a class="btn btn-small" href="">add item</a>
+                                </td>
+                                <td></td>
+                                <td>Total:</td>
+                                <td>{{total() | currency}}</td>
+                            </tr>
+                        </table>
+                    </div><button class="btn btn-primary btn-lg" onclick=
+                    "togglediv('step-1', 'step-2')">Proceed</button>
+                </div>
+            </div>
+        </div><!--*Payment*-->
+        <div class="row setup-content step" id="step-2">
+            <div class="col-xs-12">
+                <div class="col-md-12 well">
+                    <h1 class="text-center">Payment</h1>
+              <!--Form-->
+                    
+                       <form>
+  <fieldset class="form-group col-xs-4">
+
+      <label for="firstname">First name</label>
+    <input ng-model="customer.fname" type="text" class="form-control" id="firstname" placeholder="First name" >
+    <small class="text-muted">We'll never share your email with anyone else.</small>
+  </fieldset>
+                             <fieldset class="form-group col-xs-4">
+
+      <label for="lastname">Last name</label>
+    <input type="text" class="form-control" id="lastname" placeholder="Last name" ng-model="customer.lname">
+    <small class="text-muted">We'll never share your email with anyone else.</small>
+  </fieldset>
+     <fieldset class="form-group col-xs-4">
+
+      <label for="email">Email address</label>
+    <input type="email" class="form-control" id="email" placeholder="Please, enter email" ng-model="customer.email" >
+    <small class="text-muted">We'll never share your email with anyone else.</small>
+  </fieldset>
+      <fieldset class="form-group col-xs-4" style="clear: both">
+      
+
+      <label for="city">City</label>
+    <input type="text" class="form-control" id="city" placeholder="City" ng-model="customer.city" googleplace>
+    <small class="text-muted">We'll never share your email with anyone else.</small>
+  </fieldset>
+                                 <fieldset class="form-group col-xs-4" >
+      
+
+      <label for="postalcode">Postal code</label>
+    <input type="text" class="form-control" id="postalcode" placeholder="Postal Code" ng-model="customer.postalcode">
+    <small class="text-muted">We'll never share your email with anyone else.</small>
+  </fieldset>
+            </form>
+                    
+                    <div style="clear: both" class="text-center">
+                    <!--Form End-->
+
+                    
+                    <!--Form End-->
+                    <button class="btn btn-primary btn-lg" ng-click="pay()" >Payment</button>
+                <!--onclick=
+                    " togglediv('step-2', 'step-3')"-->
+                </div>
+            </div>
+        </div> 
+        </div><!--*Thank you*-->
+        <div class="row setup-content step" id="step-3">
+                     <div class="col-xs-12">
+                <div class="col-md-12 well text-center">
+                    <h2>Thank you</h2>
+                    <p>Your order details</p>
+                    <div>
+                        <table class="table">
+                            <tr>
+                                <th>Description</th>
+                                <th>Qty</th>
+                                <th>Cost</th>
+                                <th>Total</th>
+                                <th></th>
+                            </tr>
+                            <tr ng-model="items" ng-repeat="item in invoice">
+                                <td>{{item.title}}</td>
+                                <td>{{item.qty}}</td>
+                                <td>{{item.cost|currency}}</td>
+                                <td>{{item.qty * item.cost | currency}}</td>
+                                <td>
+                                   
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                  
+                                </td>
+                                <td></td>
+                                <td>Total:</td>
+                                <td>{{total() | currency}}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div><!--*Thank you ended*-->
+    </div>
