@@ -63,7 +63,7 @@
                     <h1 class="text-center">Payment</h1>
               <!--Form-->
                     
-                       <form>
+                    <!--   <form>
   <fieldset class="form-group col-xs-4">
 
       <label for="firstname">First name</label>
@@ -96,17 +96,53 @@
     <input type="text" class="form-control" id="postalcode" placeholder="Postal Code" ng-model="customer.postalcode">
     <small class="text-muted">We'll never share your email with anyone else.</small>
   </fieldset>
-            </form>
+            </form>-->
                     
-                    <div style="clear: both" class="text-center">
-                    <!--Form End-->
+                    
+                    
+    <form name="userForm" ng-submit="pay()" novalidate>
 
+        <!-- NAME -->
+        <div class="form-group" ng-class="{ 'has-error' : userForm.name.$invalid && !userForm.name.$pristine }">
+            <label>First name</label>
+            <input type="text" id="fisrtname" name="name" class="form-control" ng-model="customer.fname" required>
+            <p ng-show="userForm.name.$invalid && !userForm.name.$pristine" class="help-block">Your fisrt name is required.</p>
+        </div>
+        
+          <div class="form-group" ng-class="{ 'has-error' : userForm.name.$invalid && !userForm.name.$pristine }">
+            <label>First name</label>
+            <input type="text" name="name" class="form-control" ng-model="customer.lname"  id="lastname" required>
+            <p ng-show="userForm.name.$invalid && !userForm.name.$pristine" class="help-block">Your last name is required.</p>
+        </div>
+        <!-- EMAIL -->
+        <div class="form-group" ng-class="{ 'has-error' : userForm.email.$invalid && !userForm.email.$pristine }">
+            <label>Email</label>
+            <input type="email" name="email" id="email" class="form-control" ng-model="customer.email">
+            <p ng-show="userForm.email.$invalid && !userForm.email.$pristine" class="help-block">Enter a valid email.</p>
+        </div>
+        
+         <div class="form-group" ng-class="{ 'has-error' : userForm.name.$invalid && !userForm.name.$pristine }">
+            <label>City</label>
+            <input type="text" name="city" class="form-control" ng-model="customer.city"  id="city" required googleplace>
+            <p ng-show="userForm.name.$invalid && !userForm.name.$pristine" class="help-block">Your city is required.</p>
+        </div>
+      
+        <!-- USERNAME -->
+        <div class="form-group" ng-class="{ 'has-error' : userForm.username.$invalid && !userForm.username.$pristine }">
+            <label>Postal code</label>
+            <input type="text" name="pcode" class="form-control" ng-id="postalcode" model="customer.postalcode" ng-minlength="3" ng-maxlength="7">
+            <p ng-show="userForm.username.$error.minlength" class="help-block">Postal code is too short.</p>
+            <p ng-show="userForm.username.$error.maxlength" class="help-block">Postal code is too long.</p>
+        </div>
+        
+      
+        <div style="clear: both" class="text-center">
+
+        <button type="submit" class="btn btn-primary btn-lg" ng-disabled="userForm.$invalid">Pay</button>
+        </div>
+    </form>
                     
-                    <!--Form End-->
-                    <button class="btn btn-primary btn-lg" ng-click="pay()" >Payment</button>
-                <!--onclick=
-                    " togglediv('step-2', 'step-3')"-->
-                </div>
+            
             </div>
         </div> 
         </div><!--*Thank you*-->

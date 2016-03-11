@@ -62,7 +62,7 @@ $(function() {
                     console.log(localStorage.sid);
                     check();
                     window.location =
-                        "http://localhost:8888/back-end/";
+                        "http://localhost/microbrewery/admin/#";
                 } else {
                     $('#hint').text(
                         '<p>email or password incorrect</p>'

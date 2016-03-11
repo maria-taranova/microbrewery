@@ -34,6 +34,8 @@ beercatApp.config(['$routeProvider', '$locationProvider', function($routeProvide
       });
 }]);
 
+
+
 /* Filter */
 
 
@@ -60,6 +62,14 @@ beercatApp.controller('beerListCtrl',['$scope', 'cartItems', '$http', '$location
     //console.log("ksfmgk"+$scope.totalqty);
 
       $scope.orderProp = 'title';
+    
+    /*Active class*/
+function HeaderController($scope, $location) 
+{ 
+    $scope.isActive = function (viewLocation) { 
+        return viewLocation === $location.path();
+    };
+}
 
 
 }]);
@@ -191,11 +201,11 @@ $scope.changed = function(){
          postalcode:""
      }
 
-     
 
  //send info to db
  
     $scope.pay = function(){
+        if ($scope.userForm.$valid) {
             var cart_url = './controller/cart.php';
             var request = $http({
                 method: "post",
@@ -220,6 +230,7 @@ $scope.changed = function(){
                     document.getElementById("totalqty").innerHTML = 0;
                     
                         });
+        }
      }
      
 

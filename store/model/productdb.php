@@ -58,8 +58,9 @@ function add_user(){
     $email = $request->email;
     $city = $request->city;
     $postalcode = $request->postalcode;
+    $password = md5("bcit");
              
-    $query = "INSERT INTO `users` (`id`, `lname`, `fname`, `email`, `city`, `postalcode`) VALUES (NULL, '".$lname."', '".$fname."', '".$email."', '".$city."', '".$postalcode."')";
+    $query = "INSERT INTO `users` (`id`, `lname`, `fname`, `email`, `city`, `postalcode`, `password`) VALUES (NULL, '".$lname."', '".$fname."', '".$email."', '".$city."', '".$postalcode."', '".$password."')";
     $result = $db->query($query);
     echo json_encode($result->fetchAll(PDO::FETCH_CLASS));
 
