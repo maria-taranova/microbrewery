@@ -5,7 +5,7 @@ function list_products(){
     //create info for users
     global $db;
     
-    $query = "SELECT id, title, image, alcohol, inventory FROM beer.products";
+    $query = "SELECT id, title, image, alcohol, inventory FROM products";
     $result = $db->query($query);
      echo json_encode($result->fetchAll(PDO::FETCH_CLASS));
   
@@ -144,4 +144,6 @@ function get_inventory(){
 //SELECT * FROM `orders` INNER JOIN orderdetail on orders.id=orderdetail.order_id INNER JOIN order_items ON orders.id = order_items.order_id
 
 //SELECT *, (product_price * product_qty) AS total FROM `orderdetail` INNER JOIN orders ON orderdetail.order_id = orders.id INNER JOIN order_items ON orderdetail.order_id = order_items.order_id 
+
+//SELECT users.lname, users.fname, orderdetail.date, (product_price * product_qty) AS total FROM `orderdetail` INNER JOIN orders ON orderdetail.order_id = orders.id INNER JOIN order_items ON orderdetail.order_id = order_items.order_id INNER JOIN users ON users.id = orders.user_id ORDER BY orders.id desc
 ?>

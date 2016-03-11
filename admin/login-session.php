@@ -34,7 +34,7 @@ include_once 'dbconfig.php';
                 $password = md5($_POST["password"]);
                
                 try {
-                    $conn = new PDO("mysql:host=$DB_host;dbname=$DB_name", $DB_pass, $DB_user);
+                    $conn = new PDO("mysql:host=$DB_host;dbname=$DB_name",  $DB_user, $DB_pass);
                     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
                     $sql = "SELECT * FROM users WHERE email = :log AND password = :pwd";
