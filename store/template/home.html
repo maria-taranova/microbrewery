@@ -14,7 +14,7 @@
 				<div class="preview-img text-center">
 					<img ng-src="{{beer.image}}" alt="{{beer.title}}"/>
             <span class="label"
-									ng-init="status = beer.status ? 'Pre-order' : 'In Stock'"
+									ng-init="status = beer.inventory > 0 ? 'Pre-order' : 'Out Of Stock'"
 									ng-class="{'label-success':beer.status, 'label-warning': !beer.status}">
               {{status}}
             </span>

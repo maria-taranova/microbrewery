@@ -47,6 +47,7 @@ beercatApp.controller('beerListCtrl',['$scope', 'cartItems', '$http', '$location
   //console.log('$location.hash() - ', $location.hash());
 
   $http.get('./controller/products.php').success(function(data, status, headers, config) {
+      console.log(data);
     $scope.beers = data;
       
   });
@@ -83,7 +84,7 @@ beercatApp.controller('CartCtrl', ['$scope', 'cartItems', '$http',
     $scope.$on('scanner-started', function(){
         $scope.totalqty = cartItems.getHowMany();
     });
-    console.log('totalqty '+$scope.totalqty); 
+    //console.log('totalqty '+$scope.totalqty); 
     
     $scope.$on('scanner-started', function(){
         $scope.items = unique(cartItems.getProperty('cart'));
@@ -91,19 +92,37 @@ beercatApp.controller('CartCtrl', ['$scope', 'cartItems', '$http',
    
     if(cartItems.getProperty('cart')){
     $scope.items = unique(cartItems.getProperty('cart'));
-        update();
-    }else{
-    $scope.items = [];
-    }
         
-                
+    
+    update();
+    }else{
+        $scope.items = [];
+    }
+        //check the inventory
+       /*for(var i=0;i<$scope.items.length;i++){
+        
+                 
+         $scope.processInventory = function(title, index) {
+            var url_product = './controller/likes.php';
+                 //get info for selected sku
+            $http.get(url_product, {params: {title: title}}).success(function(data) {
+
+            console.log(data[0].inventory);
+            $scope.items[index].inventory = parseInt(data[0].inventory);
+            console.log($scope.items);
+
+              });
+          };
+       $scope.processInventory($scope.items[i].title, i);
+         console.log("hello");
+     };*/
+             
 //hide content if nothing in cart
       $scope.checkCart = function(){
         if($scope.totalqty == 0){
-            console.log("check in progress");
           var stepOne = document.getElementById('step-1');
         console.log(stepOne);
-            stepOne.innerHTML = '<div class="col-xs-12"><div class="col-md-12 well text-center"><h2>Nothing in cart</h2></div></div>';
+            stepOne.innerHTML = '<div class="col-xs-12"><div class="col-md-12 well text-center"><h2>Please, add items to cart</h2></div></div>';
         }
     }      
 //
@@ -115,16 +134,14 @@ function unique(obj){
     var uniques=[];
     for(var i=0;i<obj.length;i++){
          
-        
-        console.log(obj[i].id);
+       
       if(!uniques.filter(
           function(e) { return e.title == obj[i].title; }).length > 0){
                 uniques.push(obj[i]);
-                console.log(uniques)
          }else{
              
              uniques.filter(
-          function(e) {  e.title == obj[i].title; 
+                        function(e) {  e.title == obj[i].title; 
                       return e.qty+=obj[i].qty})
          }
 
@@ -199,9 +216,9 @@ $scope.changed = function(){
                                 $scope.invoice = $scope.items;
                                 $scope.totalsum = $scope.total();
                                console.log($scope.invoice+ " the sum "+$scope.totalsum);
-                             cartItems.removeItems();
-                            
-                             
+                    cartItems.removeItems();
+                    document.getElementById("totalqty").innerHTML = 0;
+                    
                         });
      }
      

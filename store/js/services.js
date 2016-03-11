@@ -117,6 +117,7 @@ beercatApp.service('cartItems', function(cacheService, $rootScope) {
 
         },
         removeItems: function(){
+            invoice.items = [];
             cacheService.removeData('cart');
             cacheService.removeData('total');
 

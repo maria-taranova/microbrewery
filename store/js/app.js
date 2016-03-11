@@ -36,7 +36,7 @@
 var lol = function () {
     if($scope.totalqty == 0){
     var stepOne = document.getElementById("step-1");
-    stepOne.innerHTML = "Nothing herew yet";   
+    stepOne.innerHTML = "Nothing here yet";   
     console.log("inner acript");
 };
 };

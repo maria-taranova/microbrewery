@@ -1,4 +1,4 @@
 <?php
-include("../model/likesdb.php");
- get_likes();
+include("../model/productdb.php");
+ get_inventory();
 ?>

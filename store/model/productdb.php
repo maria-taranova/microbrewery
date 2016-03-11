@@ -5,7 +5,7 @@ function list_products(){
     //create info for users
     global $db;
     
-    $query = "SELECT id, title, image, alcohol FROM beer.products";
+    $query = "SELECT id, title, image, alcohol, inventory FROM beer.products";
     $result = $db->query($query);
      echo json_encode($result->fetchAll(PDO::FETCH_CLASS));
   
@@ -110,31 +110,29 @@ function insert_order_items(){
           $qty = (int) $row['qty'];
         
           $valuesArr[] = "('$product_id', '$cost', (SELECT MAX(id) FROM orders), '$qty')";
+          $queryInv = "UPDATE `products` SET `inventory` = inventory -'".$qty."' WHERE `products`.`id` = '".$product_id."'";
+          $db->query($queryInv);
+
+
      };
 
     $query .= implode(',', $valuesArr);
     $result = $db->query($query);
-    //updateinv($items);
+    
+  
 };
 
-/*function updateinv($items){
-  global $db;
-   
+
+
+
+function get_inventory(){
+    //create info for users
+    global $db;
     
-    foreach($items as $row){
-          $product_id = (int) $row['id'];
-          $qty = (int) $row['qty'];
-        
-            
-            echo ($query);
-     };
-
-    
-};*/
-
-
-function delete_user(){
-    //delete info for users
+    $query = "SELECT inventory FROM products WHERE title='".$_GET['title']."'";
+    $result = $db->query($query);
+     echo json_encode($result->fetchAll(PDO::FETCH_CLASS));
+  
 }
 
 
